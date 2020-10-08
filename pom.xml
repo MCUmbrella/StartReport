@@ -6,7 +6,7 @@
 
     <groupId>net.e621.mcumbrella.srp</groupId>
     <artifactId>StartReport</artifactId>
-    <version>0000</version>
+    <version>0001</version>
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/javax.mail/mail -->
@@ -30,6 +30,14 @@
                             <mainClass>net.e621.mcumbrella.srp.A</mainClass>
                         </manifest>
                     </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>6</source>
+                    <target>6</target>
                 </configuration>
             </plugin>
         </plugins>
