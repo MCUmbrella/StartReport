@@ -6,10 +6,9 @@
 
     <groupId>net.e621.mcumbrella.srp</groupId>
     <artifactId>StartReport</artifactId>
-    <version>0003</version>
+    <version>0004</version>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/javax.mail/mail -->
         <dependency>
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>

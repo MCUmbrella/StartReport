@@ -11,11 +11,11 @@ import java.io.*;
 import java.util.Date;
 import java.util.Properties;
 public class A {
-    public static void main(String[] args) //throws MessagingException
+    public static void main(String[] args)
     {
         System.out.println("[i] Starting.");
         //INIT__________________________________________
-        String ver = null, user = null, pswd = null, to = null, file = null, smtp = null, subj = null, body = null;
+        String ver = null, user = null, pswd = null, to = null, file = null, smtp = null, subj = null, body = null, name = null;
         Properties c = new Properties();
         try {
 
@@ -29,6 +29,7 @@ public class A {
             smtp = c.getProperty("smtp");
             subj = c.getProperty("subj");
             body = c.getProperty("body");
+            name = c.getProperty("name");//TODO: flag: detect real file name and use it
 
         } catch (Throwable e) {
             System.out.println("[X] Error loading config:");
@@ -38,13 +39,14 @@ public class A {
         if (args.length != 0 && args[0].equals("-d")) {
             System.out.println("[D] Values:\nver  | " + ver + "\nuser | " + user + "\npswd | " + pswd + "\nto   | " + to + "\nfile | " + file + "\nsmtp | " + smtp + "\nsubj | " + subj);
         }
-        if (
+        if (//TODO: maybe sth can be optimized here
                 user == null || pswd == null || to == null || smtp == null || subj == null || body == null ||
                         !ver.equals("2") || user.equals("") || pswd.equals("") || to.equals("") || smtp.equals("") || subj.equals("") || body.equals("")
         ) {
             System.out.println("[X] Error loading config: Incorrect config");
             System.exit(-1);
         }
+        if(file!=null&&!new File(file).exists()&&!file.equals("")){System.out.println("[X] Specified file not found: "+file);System.exit(-1);}
         System.out.println("[i] Started.");
         //INIT END--------------------------------------
 
@@ -55,7 +57,7 @@ public class A {
             p.put("mail.smtp.auth", "true");
             p.put("mail.smtp.host", smtp);
             p.put("mail.transport.protocol", "smtp");
-            p.put("mail.debug", "true");
+            if (args.length != 0 && args[0].equals("-d")){p.put("mail.debug", "true");}
             p.put("mail.smtp.starttls.enable", "true");
             p.put("mail.user", user);
             p.put("mail.password", pswd);
@@ -77,9 +79,10 @@ public class A {
             MimeBodyPart bp = new MimeBodyPart();
             bp.setContent(body, "text/html;charset=UTF-8");
             mp.addBodyPart(bp);
-            if (!(file == null && file.equals(""))) {
+            if (file!=null&&!file.equals("")) {
                 MimeBodyPart fl = new MimeBodyPart();
                 fl.setDataHandler(new DataHandler(new FileDataSource(file)));
+                //TODO: detect real file name and use it
                 mp.addBodyPart(fl);
             }
             mp.setSubType("mixed");
