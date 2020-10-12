@@ -6,7 +6,7 @@
 
     <groupId>net.e621.mcumbrella.srp</groupId>
     <artifactId>StartReport</artifactId>
-    <version>0004</version>
+    <version>0005</version>
 
     <dependencies>
         <dependency>
