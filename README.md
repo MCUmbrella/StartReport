@@ -1,7 +1,9 @@
-### StartReport
+## StartReport
 #### Send email(with/without specified file) to specified address on start
 ### Build:
 `mvn package assembly:single`
+### Download: [HERE](https://github.com/mcumbrella/startreport/releases)
+### Wiki: [HERE](https://github.com/MCUmbrella/StartReport/wiki)
 ### Usage:
 `java -jar xxx.jar [-c=<path to config file>] [-d]`
 - **-c**: Set the config file that StartReport should use. Default is "cfg.properties"
