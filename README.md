@@ -18,4 +18,4 @@
 - **file**: Which file u want to send. Keep it blank if u dont want to send file
 - **smtp**: SMTP server used for sending mail
 - **subj**: Email subject
-- **body**: Email content. HTML supported
+- **body**: Email content. HTML supported - `{DATE}` and `{FILE}` will be replaced

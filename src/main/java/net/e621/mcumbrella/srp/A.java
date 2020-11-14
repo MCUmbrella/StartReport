@@ -6,7 +6,7 @@ import java.io.*;
 import java.util.*;
 public class A {
     public static void main(String[] args) {
-        System.out.println("[i] Starting.");
+        System.out.println("[i] StartReport starting.");
         //INIT__________________________________________
         String ver = null, user = null, pswd = null, to = null, file = null, smtp = null, subj = null, body = null;
         boolean cfgSet = false, dbgSet = false;
@@ -35,7 +35,7 @@ public class A {
             file = c.getProperty("file");
             smtp = c.getProperty("smtp");
             subj = c.getProperty("subj");
-            body = c.getProperty("body");
+            body = c.getProperty("body").replace("{DATE}",new Date().toString()).replace("{FILE}",file);
 
         } catch (Throwable e) {
             System.out.println("[X] Error loading config:");
@@ -43,24 +43,21 @@ public class A {
             System.exit(-1);
         }
         if (dbgSet) {
-            System.out.println("[D] Values:\nver  | " + ver + "\nuser | " + user + "\npswd | " + pswd + "\nto   | " + to + "\nfile | " + file + "\nsmtp | " + smtp + "\nsubj | " + subj);
+            System.out.println("[D] Build number: 6 - Made by Umbrella Studio.\n    Inspired by life, designed for life.\n" + "[D] Values:\nver\t| " + ver + "\nuser\t| " + user + "\npswd\t| " + pswd + "\nto\t| " + to + "\nfile\t| " + file + "\nsmtp\t| " + smtp + "\nsubj\t| " + subj + "\nbody\t| " + body);
         }
         if (//TODO: maybe sth can be optimized here
-                user == null || pswd == null || to == null || smtp == null || subj == null || body == null ||
+                user == null || pswd == null || to == null || smtp == null || subj == null ||
                         !ver.equals("2") || user.equals("") || pswd.equals("") || to.equals("") || smtp.equals("") || subj.equals("") || body.equals("")
         ) {
             System.out.println("[X] Error loading config: Incorrect config");
             System.exit(-1);
         }
-        if (file != null && !new File(file).exists() && !file.equals("")) {
+        if (!file.equals("") && !new File(file).exists()) {
             System.out.println("[X] Specified file not found: " + file);
             System.exit(-1);
         }
-        System.out.println("[i] Started.");
-        //INIT END--------------------------------------
-
-        //MAIN__________________________________________
-        System.out.println("[i] Sending.");
+        System.out.println("[i] initialization complete. Sending mail.");
+        //INIT -> MAIN----------------------------------
         try {
             final Properties p = new Properties();
             p.put("mail.smtp.auth", "true");
@@ -90,7 +87,7 @@ public class A {
             MimeBodyPart bp = new MimeBodyPart();
             bp.setContent(body, "text/html;charset=UTF-8");
             mp.addBodyPart(bp);
-            if (file != null && !file.equals("")) {
+            if (!file.equals("")) {
                 MimeBodyPart fl = new MimeBodyPart();
                 fl.setDataHandler(new DataHandler(new FileDataSource(file)));
                 fl.setFileName(MimeUtility.encodeText(file.split("/")[file.split("/").length - 1]));
