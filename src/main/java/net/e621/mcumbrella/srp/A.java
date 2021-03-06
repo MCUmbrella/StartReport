@@ -58,7 +58,9 @@ public class A {
             System.out.println("[X] Specified file not found: " + file);
             System.exit(-1);
         }
-        if(port.equals("587") && ssl.equals("true")) {
+        if(port.equals("25") && ssl.equals("true")) {
+            System.out.println("[!] Port 25 is designed for non-SSL SMTP connection. Mail sending may not work");
+        }else if(port.equals("587") && ssl.equals("true")) {
             System.out.println("[!] Port 587 is designed for non-SSL SMTP connection. Mail sending may not work");
         }else if(port.equals("465") && ssl.equals("false")) {
             System.out.println("[!] Port 465 is designed for SMTP connection with SSL. Mail sending may not work");
