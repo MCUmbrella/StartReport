@@ -14,13 +14,9 @@ public class A {
         for (String arg : args) {
             if (arg.equals("-d")) {
                 dbgSet = true;
-                break;
-            }
-        }
-        for (String arg : args) {
-            if (arg.startsWith("-c=") && !cfgSet) {
-                cfgSet = true;
+            }else if (arg.startsWith("-c=") && !cfgSet) {
                 cfgf = arg.substring(3);
+                cfgSet = true;
             }
         }
         Properties c = new Properties();
