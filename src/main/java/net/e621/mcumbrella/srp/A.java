@@ -46,7 +46,7 @@ public class A {
             System.exit(-1);
         }
         if (dbgSet) {
-            System.out.println("[D] Build number: 7 - Made by Umbrella Studio.\n    Inspired by life, designed for life.\n" + "[D] Values:\nver\t| " + ver + "\nuser\t| " + user + "\npswd\t| " + pswd + "\nto\t| " + to + "\nfile\t| " + file + "\nsmtp\t| " + smtp + "\nport\t| " + port +"\nsubj\t| " + subj + "\nbody\t| " + body);
+            System.out.println("[D] Build number: 7 - Made by Umbrella Studio.\n    Inspired by life, designed for life.\n" + "[D] Values:\nver\t| " + ver + "\nuser\t| " + user + "\npswd\t| " + pswd + "\nto\t| " + to + "\nfile\t| " + file + "\nsmtp\t| " + smtp + "\nssl\t| " + ssl + "\nport\t| " + port +"\nsubj\t| " + subj + "\nbody\t| " + body);
         }
         if (
                 user == null || pswd == null || to == null || smtp == null || ssl ==null || port==null || subj == null ||
