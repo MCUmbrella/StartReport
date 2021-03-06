@@ -9,7 +9,7 @@ public class A {
     public static void main(String[] args) {
         System.out.println("[i] StartReport starting.");
         //INIT__________________________________________
-        String ver = null, user = null, pswd = null, to = null, file = null, smtp = null, ssl = null, port = null, subj = null, body = null, stls=null,ehlo=null;
+        String ver = null, user = null, pswd = null, to = null, file = null, smtp = null, ssl = null, port = null, subj = null, body = null;
         boolean cfgSet = false, dbgSet = false;
         String cfgf = "cfg.properties";
         for (String arg : args) {
@@ -39,8 +39,6 @@ public class A {
             port = c.getProperty("port");
             subj = c.getProperty("subj");
             body = c.getProperty("body").replace("{DATE}",new Date().toString()).replace("{FILE}",file);
-            stls=c.getProperty("stls");
-            ehlo=c.getProperty("ehlo");
 
         } catch (Throwable e) {
             System.out.println("[X] Error loading config:");
@@ -60,6 +58,11 @@ public class A {
         if (!file.equals("") && !new File(file).exists()) {
             System.out.println("[X] Specified file not found: " + file);
             System.exit(-1);
+        }
+        if(port.equals("587") && ssl.equals("true")) {
+            System.out.println("[!] Port 587 is designed for non-SSL SMTP connection. Mail sending may not work");
+        }else if(port.equals("465") && ssl.equals("false")) {
+            System.out.println("[!] Port 465 is designed for SMTP connection with SSL. Mail sending may not work");
         }
         System.out.println("[i] initialization complete. Sending mail.");
         //INIT -> MAIN----------------------------------
@@ -89,7 +92,6 @@ public class A {
             p.setProperty("mail.smtp.ssl.protocols", "TLSv1.1 TLSv1.2");
             p.put("mail.smtp.auth", "true");
             p.put("mail.smtp.host", smtp);
-            //p.put("mail.smtp.localhost", ehlo);
             p.put("mail.smtp.port", port);
             if (dbgSet) {
                 p.put("mail.debug", "true");
