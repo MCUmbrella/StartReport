@@ -3,7 +3,6 @@ import javax.activation.*;
 import javax.mail.*;
 import javax.mail.internet.*;
 import java.io.*;
-import java.security.Security;
 import java.util.*;
 public class A {
     public static void main(String[] args) {
@@ -72,12 +71,12 @@ public class A {
             {
                 if(dbgSet){System.out.println("[D] SSL enabled.");}
                 p.put("mail.transport.protocol", "smtps");
-                Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
+                //Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
                 p.put("mail.smtp.ssl.enable", "true");
-                p.put("mail.smtps.ssl.enable", "true");
-                p.put("mail.smtps.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-                p.put("mail.smtps.socketFactory.fallback", "false");
-                p.put("mail.smtps.socketFactory.port", port);
+                //p.put("mail.smtps.ssl.enable", "true");
+                //p.put("mail.smtps.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+                //p.put("mail.smtps.socketFactory.fallback", "false");
+                //p.put("mail.smtps.socketFactory.port", port);
                 p.put("mail.smtps.auth", "true");
                 p.put("mail.smtps.port", port);
                 p.put("mail.smtps.ssl.trust", smtp);
