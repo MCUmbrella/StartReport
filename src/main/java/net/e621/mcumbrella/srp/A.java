@@ -67,18 +67,14 @@ public class A {
         //INIT -> MAIN----------------------------------
         try {
             final Properties p = new Properties();
+            if (dbgSet) {
+                p.put("mail.debug", "true");
+            }
             if(ssl.equals("true"))
             {
                 if(dbgSet){System.out.println("[D] SSL enabled.");}
                 p.put("mail.transport.protocol", "smtps");
-                //Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
                 p.put("mail.smtp.ssl.enable", "true");
-                //p.put("mail.smtps.ssl.enable", "true");
-                //p.put("mail.smtps.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-                //p.put("mail.smtps.socketFactory.fallback", "false");
-                //p.put("mail.smtps.socketFactory.port", port);
-                //p.put("mail.smtps.auth", "true");
-                //p.put("mail.smtps.port", port);
                 p.put("mail.smtps.ssl.trust", smtp);
                 p.put("mail.smtp.starttls.enable", "false");
             }else
@@ -92,9 +88,6 @@ public class A {
             p.put("mail.smtp.auth", "true");
             p.put("mail.smtp.host", smtp);
             p.put("mail.smtp.port", port);
-            if (dbgSet) {
-                p.put("mail.debug", "true");
-            }
             p.put("mail.user", user);
             p.put("mail.password", pswd);
             Authenticator authenticator = new Authenticator() {
