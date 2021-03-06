@@ -75,21 +75,21 @@ public class A {
                 p.put("mail.smtps.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
                 p.put("mail.smtps.socketFactory.fallback", "false");
                 p.put("mail.smtps.socketFactory.port", port);
-                p.put("mail.host", smtp);
                 p.put("mail.smtps.auth", "true");
                 p.put("mail.smtps.port", port);
                 p.put("mail.smtps.ssl.trust", smtp);
+                p.put("mail.smtp.starttls.enable", "false");
             }else
             {
                 if(dbgSet){System.out.println("[D] SSL disabled.");}
                 p.put("mail.transport.protocol", "smtp");
                 p.put("mail.smtp.ssl.enable", "false");
+                p.put("mail.smtp.starttls.enable", "true");
             }
-            p.put("mail.smtp.starttls.enable", stls);
             p.setProperty("mail.smtp.ssl.protocols", "TLSv1.1 TLSv1.2");
             p.put("mail.smtp.auth", "true");
             p.put("mail.smtp.host", smtp);
-            p.put("mail.smtp.localhost", ehlo);
+            //p.put("mail.smtp.localhost", ehlo);
             p.put("mail.smtp.port", port);
             if (dbgSet) {
                 p.put("mail.debug", "true");
