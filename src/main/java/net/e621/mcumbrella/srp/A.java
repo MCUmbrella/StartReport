@@ -111,7 +111,7 @@ public class A {
             if (!file.equals("")) {
                 MimeBodyPart fl = new MimeBodyPart();
                 fl.setDataHandler(new DataHandler(new FileDataSource(file)));
-                fl.setFileName(MimeUtility.encodeText(file.split("/")[file.split("/").length - 1]));
+                fl.setFileName(MimeUtility.encodeText(file.split(System.getProperty("file.separator"))[file.split(System.getProperty("file.separator")).length - 1]));
                 mp.addBodyPart(fl);
             }
             mp.setSubType("mixed");
