@@ -77,8 +77,8 @@ public class A {
                 //p.put("mail.smtps.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
                 //p.put("mail.smtps.socketFactory.fallback", "false");
                 //p.put("mail.smtps.socketFactory.port", port);
-                p.put("mail.smtps.auth", "true");
-                p.put("mail.smtps.port", port);
+                //p.put("mail.smtps.auth", "true");
+                //p.put("mail.smtps.port", port);
                 p.put("mail.smtps.ssl.trust", smtp);
                 p.put("mail.smtp.starttls.enable", "false");
             }else
